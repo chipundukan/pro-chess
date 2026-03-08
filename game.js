@@ -1,87 +1,45 @@
-let board
-let game = new Chess()
+var board = null
+var game = new Chess()
 
-const historyDiv = document.getElementById("history")
+function onDragStart (source, piece) {
 
-function onDragStart(source, piece){
+  // stop if game over
+  if (game.game_over()) return false
 
-if(game.game_over()) return false
-
-if(piece.search(/^b/) !== -1) return false
-
+  // only allow white pieces
+  if (piece.search(/^b/) !== -1) return false
 }
 
-function onDrop(source, target){
+function onDrop (source, target) {
 
-let move = game.move({
-from: source,
-to: target,
-promotion: "q"
-})
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q'
+  })
 
-if(move === null) return "snapback"
+  if (move === null) return 'snapback'
 
-updateHistory()
-
-setTimeout(aiMove,300)
-
+  window.setTimeout(makeRandomMove, 250)
 }
 
-function aiMove(){
+function makeRandomMove () {
 
-if(game.game_over()) return
+  var possibleMoves = game.moves()
 
-let moves = game.moves()
+  if (possibleMoves.length === 0) return
 
-let move = moves[Math.floor(Math.random()*moves.length)]
+  var randomIdx = Math.floor(Math.random() * possibleMoves.length)
+  game.move(possibleMoves[randomIdx])
 
-game.move(move)
-
-board.position(game.fen())
-
-updateHistory()
-
+  board.position(game.fen())
 }
 
-function updateHistory(){
-
-historyDiv.innerHTML = game.history().join("<br>")
-
+var config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop
 }
 
-function undoMove(){
-
-game.undo()
-game.undo()
-
-board.position(game.fen())
-
-updateHistory()
-
-}
-
-function resetGame(){
-
-game.reset()
-
-board.start()
-
-historyDiv.innerHTML=""
-
-}
-
-window.onload = function(){
-
-board = Chessboard("board",{
-
-draggable:true,
-
-position:"start",
-
-onDragStart:onDragStart,
-
-onDrop:onDrop
-
-})
-
-}
+board = Chessboard('board', config)
