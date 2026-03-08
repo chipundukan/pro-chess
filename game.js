@@ -1,6 +1,5 @@
-let board = null
-
-const game = new Chess()
+let board
+let game = new Chess()
 
 const historyDiv = document.getElementById("history")
 
@@ -24,7 +23,7 @@ if(move === null) return "snapback"
 
 updateHistory()
 
-setTimeout(aiMove,400)
+setTimeout(aiMove,300)
 
 }
 
@@ -34,9 +33,9 @@ if(game.game_over()) return
 
 let moves = game.moves()
 
-let randomMove = moves[Math.floor(Math.random()*moves.length)]
+let move = moves[Math.floor(Math.random()*moves.length)]
 
-game.move(randomMove)
+game.move(move)
 
 board.position(game.fen())
 
@@ -71,6 +70,8 @@ historyDiv.innerHTML=""
 
 }
 
+window.onload = function(){
+
 board = Chessboard("board",{
 
 draggable:true,
@@ -82,3 +83,5 @@ onDragStart:onDragStart,
 onDrop:onDrop
 
 })
+
+}
