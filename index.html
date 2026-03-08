@@ -1,18 +1,41 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>FC Web Game</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
-</head>
-<body>
-<div id="game"></div>
+<html lang="en">
 
-<!-- Game scripts -->
-<script src="main.js"></script>
-<script src="scenes/MatchScene.js"></script>
-<script src="systems/Controls.js"></script>
-<script src="systems/AI.js"></script>
-<script src="systems/Commentary.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <title>Pro Chess</title>
+
+  <!-- jQuery (required for Chessboard.js) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Chessboard.js CSS -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/chessboard‑js/1.0.0/chessboard.min.css">
+
+  <!-- Chess.js (game logic) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"></script>
+
+  <!-- Chessboard.js (board UI) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard‑js/1.0.0/chessboard.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>♟ Pro Chess</h1>
+
+  <div id="board" style="width: 90vw; max-width: 500px; margin: auto;"></div>
+
+  <div class="controls">
+    <button onclick="undoMove()">Undo</button>
+    <button onclick="resetGame()">Reset</button>
+  </div>
+
+  <h3>Moves</h3>
+  <div id="history"></div>
+
+  <script src="game.js"></script>
 </body>
+
 </html>
