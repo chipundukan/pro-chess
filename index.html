@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Pro Chess</title>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard.min.css">
+href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard.min.js"></script>
+<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"></script>
 
 <link rel="stylesheet" href="style.css">
 
@@ -25,15 +22,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard.min.
 
 <h1>♟ Pro Chess</h1>
 
-<div id="board" style="width:400px; margin:auto;"></div>
-
-<div>
+<div class="buttons">
 <button onclick="undoMove()">Undo</button>
-<button onclick="resetGame()">Reset</button>
+<button onclick="resetBoard()">Reset</button>
 </div>
 
-<h3>Moves</h3>
-<div id="history"></div>
+<h2>Moves</h2>
+<div id="moves"></div>
+
+<div id="board"></div>
 
 <script src="game.js"></script>
 
