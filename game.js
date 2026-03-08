@@ -24,7 +24,7 @@ if(move === null) return "snapback"
 
 updateHistory()
 
-setTimeout(aiMove,300)
+setTimeout(aiMove,400)
 
 }
 
@@ -61,14 +61,24 @@ updateHistory()
 
 }
 
+function resetGame(){
+
+game.reset()
+
+board.start()
+
+historyDiv.innerHTML=""
+
+}
+
 board = Chessboard("board",{
 
-draggable: true,
+draggable:true,
 
-position: "start",
+position:"start",
 
-onDragStart: onDragStart,
+onDragStart:onDragStart,
 
-onDrop: onDrop
+onDrop:onDrop
 
 })
