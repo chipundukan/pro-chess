@@ -1,38 +1,18 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<title>Pro Chess</title>
-
-<link rel="stylesheet"
-href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"></script>
-
+<title>FC Web Game</title>
 <link rel="stylesheet" href="style.css">
-
+<script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
 </head>
-
 <body>
+<div id="game"></div>
 
-<h1>♟ Pro Chess</h1>
-
-<div class="buttons">
-<button onclick="undoMove()">Undo</button>
-<button onclick="resetBoard()">Reset</button>
-</div>
-
-<h2>Moves</h2>
-<div id="moves"></div>
-
-<div id="board"></div>
-
-<script src="game.js"></script>
-
+<!-- Game scripts -->
+<script src="main.js"></script>
+<script src="scenes/MatchScene.js"></script>
+<script src="systems/Controls.js"></script>
+<script src="systems/AI.js"></script>
+<script src="systems/Commentary.js"></script>
 </body>
 </html>
