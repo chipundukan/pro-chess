@@ -1,45 +1,102 @@
-var board = null
+// create game instance
 var game = new Chess()
 
-function onDragStart (source, piece) {
+// board variable
+var board = null
 
-  // stop if game over
-  if (game.game_over()) return false
+// move history display
+var historyDiv = document.getElementById("history")
 
-  // only allow white pieces
-  if (piece.search(/^b/) !== -1) return false
+// prevent illegal moves and black moves by player
+function onDragStart(source, piece) {
+
+    // stop if game over
+    if (game.game_over()) return false
+
+    // allow only white pieces to move
+    if (piece.search(/^b/) !== -1) return false
 }
 
-function onDrop (source, target) {
+// handle piece drop
+function onDrop(source, target) {
 
-  var move = game.move({
-    from: source,
-    to: target,
-    promotion: 'q'
-  })
+    var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q'
+    })
 
-  if (move === null) return 'snapback'
+    // illegal move
+    if (move === null) return 'snapback'
 
-  window.setTimeout(makeRandomMove, 250)
+    updateHistory()
+
+    // AI move
+    window.setTimeout(makeRandomMove, 300)
 }
 
-function makeRandomMove () {
+// simple AI move
+function makeRandomMove() {
 
-  var possibleMoves = game.moves()
+    if (game.game_over()) return
 
-  if (possibleMoves.length === 0) return
+    var possibleMoves = game.moves()
 
-  var randomIdx = Math.floor(Math.random() * possibleMoves.length)
-  game.move(possibleMoves[randomIdx])
+    if (possibleMoves.length === 0) return
 
-  board.position(game.fen())
+    var randomIndex = Math.floor(Math.random() * possibleMoves.length)
+
+    game.move(possibleMoves[randomIndex])
+
+    board.position(game.fen())
+
+    updateHistory()
 }
 
-var config = {
-  draggable: true,
-  position: 'start',
-  onDragStart: onDragStart,
-  onDrop: onDrop
+// update move list
+function updateHistory() {
+
+    var history = game.history()
+
+    historyDiv.innerHTML = history.join("<br>")
 }
 
-board = Chessboard('board', config)
+// undo last moves
+function undoMove() {
+
+    game.undo()
+    game.undo()
+
+    board.position(game.fen())
+
+    updateHistory()
+}
+
+// reset game
+function resetGame() {
+
+    game.reset()
+
+    board.start()
+
+    historyDiv.innerHTML = ""
+}
+
+// initialize board AFTER page loads
+window.onload = function () {
+
+    var config = {
+
+        draggable: true,
+
+        position: 'start',
+
+        onDragStart: onDragStart,
+
+        onDrop: onDrop
+
+    }
+
+    board = Chessboard('board', config)
+
+}
